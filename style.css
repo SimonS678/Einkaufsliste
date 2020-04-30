@@ -34,6 +34,12 @@ form input, form button{
     border: none;
     background-color: white;
 }
+@media(max-width:700px) {
+    form input {
+    width: 200px;
+    margin-left: 5px;
+    }
+}    
 
 form button{
     color: #fda085;
@@ -54,8 +60,20 @@ form button:hover {
 }
 
 .todo-list{
-    min-width: 30%;
+    min-width: 50%;
     list-style: none;
+}
+
+@media (max-width: 700px) {
+    .todo-list{
+        min-width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .todo-list{
+        min-width: 30%;
+    }
 }
 
 .todo{
@@ -139,4 +157,10 @@ select {
 .select:hover::after {
     background: white;
     color: #ff6f47;
+}
+
+@media (max-width: 700px) {
+    .select {
+        width: 47px;
+    }
 }
