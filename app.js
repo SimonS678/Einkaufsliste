@@ -38,7 +38,7 @@ function addTodo(event){
 
     todoList.appendChild(todoDiv);
 
-    todoInput.value= " ";
+    todoInput.value= "";
 }
 
     function deleteCheck(e) {
@@ -51,12 +51,18 @@ function addTodo(event){
             removeLocalTodos(todo);
             todo.addEventListener('transitionend', function() {
                 todo.remove();
-            })               
+            })
+            removeLocalCompleted(todo)           
         }
 
         if (item.classList[0] === "complete-btn") {
             const todo = item.parentElement;
             todo.classList.toggle("completed");
+            if (todo.classList.contains("completed")){
+                saveLocalCompleted(todo)  
+            } else {
+                removeLocalCompleted(todo)     
+            }
         }
     }
 
@@ -140,4 +146,33 @@ function removeLocalTodos(todo) {
     const todoIndex = todo.children[0].innerText;
     todos.splice(todos.indexOf(todoIndex),1);
     localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function saveLocalCompleted(todo){
+    let todos;
+    if(localStorage.getItem('completed') === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("completed"));
+    }
+
+    todos.push(todo.children[0].innerText);
+    localStorage.setItem("completed", JSON.stringify(todos));
+}
+
+function removeLocalCompleted(todo) {
+    let todos;
+    if(localStorage.getItem('completed') === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("completed"));
+    }
+    const todoIndex = todo.children[0].innerText;
+    console.log(todoIndex)
+    console.log(todos.indexOf(todoIndex))
+    
+    todos.splice(todos.indexOf(todoIndex),1);
+    
+    localStorage.setItem("completed", JSON.stringify(todos));
+    
 }
