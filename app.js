@@ -168,11 +168,9 @@ function removeLocalCompleted(todo) {
         todos = JSON.parse(localStorage.getItem("completed"));
     }
     const todoIndex = todo.children[0].innerText;
-    console.log(todoIndex)
-    console.log(todos.indexOf(todoIndex))
-    
-    todos.splice(todos.indexOf(todoIndex),1);
-    
-    localStorage.setItem("completed", JSON.stringify(todos));
-    
+
+    if (todos.indexOf(todoIndex) !== -1) {
+        todos.splice(todos.indexOf(todoIndex),1);
+        localStorage.setItem("completed", JSON.stringify(todos));
+    }    
 }
